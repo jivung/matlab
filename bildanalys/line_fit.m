@@ -1,6 +1,6 @@
 function line_fit 
     
-    load('C:\Users\Micke\Desktop\linjepunkter.mat')
+    load('C:\Users\Micke\Desktop\Skola\Bildanalys\Assignment 3\linjepunkter.mat')
     
     y2 = least_squares(x,y);
     y3 = total_least_squares(x,y);
