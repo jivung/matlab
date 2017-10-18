@@ -7,24 +7,28 @@ function graph_cuts
     
     mean_chamber = mean(chamber_values);
     std_chamber = std(chamber_values);
+
+    lambda = 2;
     
-    segment_image(im,mean_background/std_background,mean_chamber/std_chamber,1.7);
+    segmented_image = segment_image(im,lambda,mean_background,std_background,mean_chamber,std_chamber);
+    
+    imshow(segmented_image);
 
 end
 
-function segment_image(im,mu0,mu1,lambda)
+function Theta = segment_image(im,lambda,mean_background,std_background,mean_chamber,std_chamber)
+    % Calculate A
     [M,N] = size(im);
     numPixels = M*N;
-    neighbors = edges4connected(M,N);
+    neighbors = edges8connected(M,N);
     i = neighbors(:,1);
     j = neighbors(:,2);
     A = sparse(i,j,lambda,numPixels,numPixels);
-    T = [(im(:)-mu1).^2 (im(:)-mu0).^2];
+    % Calculate T
+    T = [((im(:)-mean_chamber)/std_chamber).^2 ((im(:)-mean_background)/std_background).^2];
     T = sparse(T);
-    % solve minimum cut
+    % Solve minimum cut
     [E, Theta] = maxflow(A,T);
     Theta = reshape(Theta,M,N);
     Theta = double(Theta);
-    Theta
-
 end
