@@ -1,11 +1,17 @@
 function finnfemfel
     
     % Load in the images
-    load('/Users/michaeljivung/Desktop/femfel.mat')
+    load('femfel.mat')
+    
+    figure(3)
+    image(femfel1)
+    
+     figure(4)
+    image(femfel2)
     
     % Set parameters
     rad = 6;
-    threshold = 2300;
+    threshold = 2200;
     
     % Pad the images with 3 pixels at each side
     image1 = double(padarray(femfel1, [rad rad], 0, 'both'));
