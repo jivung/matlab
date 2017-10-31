@@ -31,8 +31,9 @@ mysystem.classifier = 'features2class'; % What is the name of your classificatio
 mysystem.classification_data = classification_data;
 
 %% Choose dataset
-%datadir = '../datasets/short1';     % Which folder of examples are you going to test it on
-datadir = '../datasets/home1';     % Which folder of examples are you going to test it on
+%datadir = '../datasets/short1';   % Which folder of examples are you going to test it on
+datadir = '../datasets/short2';   
+%datadir = '../datasets/home1';     
 
 %% Benchmark and visualize
 mode = 0; % debug modes 
@@ -40,6 +41,8 @@ mode = 0; % debug modes
 % 1 with some plots
 % 2 with the most plots
 [hitrate,confmat,allres,alljs,alljfg,allX,allY]=benchmark_inl3(mysystem,datadir,mode);
+
+disp(['hit rate on ', datadir, ' was: ', num2str(hitrate)])
 
 hitrate
 

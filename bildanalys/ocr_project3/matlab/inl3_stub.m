@@ -13,7 +13,7 @@ fid = fopen(fnamefacit);
 facit = fgetl(fid);
 % % fclose(fid);
 
-load('C:\Users\Micke\Desktop\ocrsegments.mat')
+load ocrsegments
 
 %load classification_data
 
@@ -24,12 +24,11 @@ for i = 1:100
 end
 
 % Train classifier
-mdl = fitcknn(X', y');
+classification_data = fitcknn(X', y');
 
 for i = 1:100
- y2 = features2class(X(:,i), mdl);
+ y2 = features2class(X(:,i), classification_data);
 end
-
 
 %% Try out the segmentation
 S2 = im2segment(bild);
@@ -40,7 +39,7 @@ B = S2{test};
 x = segment2features(B);
 
 % followed by classification of the feature
-y2 = features2class(x,mdl);
+y2 = features2class(x,classification_data);
 
 alfabet(y2);
 %%
